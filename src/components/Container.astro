@@ -4,13 +4,13 @@ import * as about from "../pages/about/about.md";
 import Card from "./Card.astro";
 import ContactCard from "./ContactCard.astro";
 
-const practices = import.meta.glob("../pages/practices/*.md");
+const projects = import.meta.glob("../pages/projects/*.md");
 const contact = import.meta.glob("../pages/contact/*.md");
 const certificates = import.meta.glob("../pages/certificates/*.md");
 
-const practiceContent = [];
-for (const path in practices) {
-  practiceContent.push(await practices[path]());
+const projectsContent = [];
+for (const path in projects) {
+  projectsContent.push(await projects[path]());
 }
 
 const contactContent = [];
@@ -31,9 +31,9 @@ for (const path in certificates) {
     </article>
   </AccordionLayout>
 
-  <AccordionLayout title={"Project"} icon={"carbon:tools"}>
+  <AccordionLayout title={"Projects"} icon={"carbon:tools"}>
     {
-      practiceContent.map((item) => {
+      projectsContent.map((item) => {
         return (
           <Card
             title={item.frontmatter.title}
