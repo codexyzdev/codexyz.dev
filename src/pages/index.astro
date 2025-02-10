@@ -19,8 +19,8 @@ import { Icon } from "astro-icon/components";
 
       document.addEventListener("visibilitychange", () => {
         document.visibilityState === "hidden"
-          ? (document.title = "Contact Me 😎👍")
-          : (document.title = "Alejandro Baez CV");
+          ? (document.title = "Contact Me")
+          : (document.title = "Alejandro Baez");
       });
     </script>
     <script>
@@ -30,8 +30,8 @@ import { Icon } from "astro-icon/components";
     <meta charset='utf-8' />
     <link rel='icon' type='image/png' href='/favicon.webp' />
     <meta name='viewport' content='width=device-width, initial-scale=1' />
-    <meta name='generator' content={Astro.generator} />
-    <title>Alejandro Baez CV</title>
+    <meta name='description' content='Alejandro Baez personal website' />
+    <title>Alejandro Baez</title>
   </head>
   <body class='flex flex-col min-h-screen'>
     <Header />

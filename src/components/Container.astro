@@ -1,12 +1,27 @@
 ---
-import { Icon } from "astro-icon/components";
 import AccordionLayout from "../layouts/AccordionLayout.astro";
 import * as about from "../pages/about/about.md";
 import Card from "./Card.astro";
 import ContactCard from "./ContactCard.astro";
-const practices = await Astro.glob("../pages/practices/*.md");
-const contact = await Astro.glob("../pages/contact/*.md");
-const certificates = await Astro.glob("../pages/certificates/*.md");
+
+const practices = import.meta.glob("../pages/practices/*.md");
+const contact = import.meta.glob("../pages/contact/*.md");
+const certificates = import.meta.glob("../pages/certificates/*.md");
+
+const practiceContent = [];
+for (const path in practices) {
+  practiceContent.push(await practices[path]());
+}
+
+const contactContent = [];
+for (const path in contact) {
+  contactContent.push(await contact[path]());
+}
+
+const certificateContent = [];
+for (const path in certificates) {
+  certificateContent.push(await certificates[path]());
+}
 ---
 
 <div class='join join-vertical gap-1'>
@@ -18,7 +33,7 @@ const certificates = await Astro.glob("../pages/certificates/*.md");
 
   <AccordionLayout title={"Project"} icon={"carbon:tools"}>
     {
-      practices.map((item) => {
+      practiceContent.map((item) => {
         return (
           <Card
             title={item.frontmatter.title}
@@ -61,7 +76,7 @@ const certificates = await Astro.glob("../pages/certificates/*.md");
   </AccordionLayout> -->
   <AccordionLayout title={"Certificates"} icon={"carbon:certificate"}>
     {
-      certificates.map((item) => {
+      contactContent.map((item) => {
         return (
           <Card
             title={item.frontmatter.title}
@@ -79,7 +94,7 @@ const certificates = await Astro.glob("../pages/certificates/*.md");
   <AccordionLayout title={"Contact"} icon={"carbon:location-person"}>
     <div class='flex flex-wrap content-around gap-4 justify-center'>
       {
-        contact.map((item) => {
+        contactContent.map((item) => {
           return (
             <ContactCard
               url={item.frontmatter.url}
